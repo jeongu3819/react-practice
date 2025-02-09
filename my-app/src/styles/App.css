@@ -35,12 +35,6 @@ html, body {
 }
 
 /* 반응형 적용 */
-@media screen and (max-width: 1024px) {
-  .main-content {
-    flex-direction: column;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .main-content {
     padding: 20px;
