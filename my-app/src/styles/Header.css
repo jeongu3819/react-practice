@@ -3,15 +3,71 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 40px;
   height: 70px;
   background-color: #0f131d;
   color: #fff;
   position: relative; /* MegaMenu를 헤더 아래 배치하기 쉽게 */
+  overflow: visible;
+  width: 100vw; /* 전체 화면 너비로 확장 */
+  max-width: 100vw;
 }
-  
+
+.logo-area .logo-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap; /* 필요할 경우 줄 바꿈 허용 */
+  min-width: fit-content;
+}
+
+.nav-item {
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  color: #ccc; /* hover 시 살짝 밝게 */
+}
+
+/* 우측 버튼 영역 */
+.nav-actions .nav-btn {
+  margin-left: 10px;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-actions .nav-btn:hover {
+  background-color: #fff;
+  color: #0f131d;
+}
+
+.nav-btn-primary {
+  background-color: #3b82f6; /* 파란색 */
+  border: none;
+}
+
+.nav-btn-primary:hover {
+  background-color: #2563eb;
+}
+
   /* 클릭한 메뉴 활성화 스타일 */
 .nav-item.active {
   color: #3b82f6;
 }
-  
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+}

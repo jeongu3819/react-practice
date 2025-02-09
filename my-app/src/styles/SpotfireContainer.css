@@ -1,22 +1,27 @@
 /* 전체 Spotfire 컨테이너 */
 .spotfire-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 20px 40px;
   background-color: #0f131d;
   color: #fff;
   text-align: center;
 }
 
-/* Spotfire 2개를 가로로 배치 */
+/* Spotfire 2개를 가로로 배치 (반응형 적용) */
 .spotfire-grid {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  max-width: 1400px; /* ✅ 최대 너비 증가 */
+  justify-content: space-evenly;
+  gap: 2vw; /* 뷰포트 크기에 맞게 간격 조정 */
+  max-width: 90vw; /* 화면 너비의 90%까지 확장 */
   margin: 0 auto;
+  flex-wrap: wrap; /* 작은 화면에서는 자동으로 줄 바꿈 */
 }
 
-/* Spotfire 박스 (크기 조정) */
+/* Spotfire 박스 (반응형 적용) */
 .spotfire-box {
   flex: 1;
   background-color: #1d2532;
@@ -25,14 +30,33 @@
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
+  position: relative;
   transition: transform 0.3s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
   
-  width: 700px;
-  height: 500px;
-  position: relative; /* ✅ 내부 요소 위치 지정 가능하도록 설정 */
+  /* 기존 고정 크기 제거하고 화면 크기에 맞게 조정 */
+  flex-basis: 45%; /* 화면 너비의 45%를 사용 */
+  height: 40vh; /* 화면 높이의 40%를 사용 */
+
+  min-width: 300px; /* 최소 크기 설정 */
+  min-height: 250px;
+  
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ✅ Spotfire 박스 오른쪽 상단에 텍스트 추가 */
+.spotfire-label {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.8); /* ✅ 반투명 배경 (선택 사항) */
+  color: #1d2532;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 2;
 }
 
 /* Spotfire 박스를 클릭하면 전체 화면 모달 활성화 */
@@ -42,7 +66,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8); /* 반투명 배경 */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +76,7 @@
 /* 전체 화면 모드의 Spotfire */
 .fullscreen-content {
   position: relative;
-  width: 90vw; /* 전체 화면 크기로 조정 */
+  width: 95vw; /* 화면 크기에 맞게 조정 */
   height: 90vh;
   background-color: #1d2532;
   padding: 20px;
@@ -62,12 +86,13 @@
   align-items: center;
 }
 
-/* Spotfire 내부 iframe (박스 크기에 맞게 자동 조정) */
+/* Spotfire 내부 iframe (부모 박스 크기에 맞게 자동 조정) */
 .spotfire-frame {
-  width: 100%; /* ✅ 부모 박스에 맞게 자동 조정 */
-  height: 100%; /* ✅ 부모 박스 높이에 맞게 자동 조정 */
+  width: 100%; /* 부모 박스에 맞게 자동 조정 */
+  height: 100%;
   border: none;
   border-radius: 5px;
+  z-index: 1;
 }
 
 /* h3 텍스트 중앙 고정 */
@@ -99,4 +124,15 @@
 
 .close-button:hover {
   color: red;
+}
+
+@media screen and (max-width: 1024px) {
+  .spotfire-grid {
+    flex-direction: column; /* 작은 화면에서는 세로 정렬 */
+    align-items: center;
+  }
+
+  .spotfire-box {
+    width: 80%; /* 작은 화면에서 중앙 정렬 */
+  }
 }

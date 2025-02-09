@@ -13,3 +13,36 @@
   height: auto;
   transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
 }
+
+/* 전체 페이지 반응형 적용 */
+html, body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+  background-color: #0f131d; /* 배경색 유지 */
+}
+
+/* 메인 컨텐츠 반응형 */
+.main-content {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 반응형 적용 */
+@media screen and (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: 20px;
+  }
+}

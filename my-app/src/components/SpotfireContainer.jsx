@@ -1,5 +1,5 @@
 // src/components/SpotfireContainer.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/SpotfireContainer.css";
 
 function SpotfireContainer({ activeMenu }) {
@@ -10,23 +10,8 @@ function SpotfireContainer({ activeMenu }) {
   };
 
   const handleClose = () => {
-    setExpandedSpotfire(null); // 전체 화면 닫기
+    setExpandedSpotfire(null);
   };
-
-  // ✅ ESC 키를 누르면 전체 화면 모드를 닫음
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setExpandedSpotfire(null); // ESC 키 입력 시 닫기
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown); // 컴포넌트 언마운트 시 이벤트 제거
-    };
-  }, []);
 
   return (
     <div className="spotfire-container">
@@ -34,10 +19,9 @@ function SpotfireContainer({ activeMenu }) {
 
       <div className="spotfire-grid">
         {/* Spotfire 1 */}
-        <div
-          className="spotfire-box"
-          onClick={() => handleExpand("spotfire1")}
-        >
+        <div className="spotfire-box" onClick={() => handleExpand("spotfire1")}>
+          {/* ✅ Spotfire 박스 오른쪽 상단에 텍스트 추가 */}
+          <div className="spotfire-label">SP1</div>
           <h3>Spotfire 1</h3>
           <iframe
             src="https://your-spotfire-url-1.com"
@@ -47,10 +31,9 @@ function SpotfireContainer({ activeMenu }) {
         </div>
 
         {/* Spotfire 2 */}
-        <div
-          className="spotfire-box"
-          onClick={() => handleExpand("spotfire2")}
-        >
+        <div className="spotfire-box" onClick={() => handleExpand("spotfire2")}>
+          {/* ✅ Spotfire 박스 오른쪽 상단에 텍스트 추가 */}
+          <div className="spotfire-label">SP2</div>
           <h3>Spotfire 2</h3>
           <iframe
             src="https://your-spotfire-url-2.com"
@@ -60,7 +43,6 @@ function SpotfireContainer({ activeMenu }) {
         </div>
       </div>
 
-      {/* 전체 화면 모달 */}
       {expandedSpotfire && (
         <div className="fullscreen-overlay" onClick={handleClose}>
           <div className="fullscreen-content">
