@@ -1,17 +1,17 @@
 /* 기존 스타일 유지하면서, 아래 메가메뉴를 포함할 공간 추가 */
 .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    height: 70px;
-    background-color: #0f131d;
-    color: #fff;
-    position: relative; /* MegaMenu를 헤더 아래 배치하기 쉽게 */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 70px;
+  background-color: #0f131d;
+  color: #fff;
+  position: relative; /* MegaMenu를 헤더 아래 배치하기 쉽게 */
+}
   
   /* 클릭한 메뉴 활성화 스타일 */
-  .nav-item.active {
-    color: #3b82f6;
-  }
+.nav-item.active {
+  color: #3b82f6;
+}
   

@@ -1,28 +1,27 @@
 /* src/styles/CardMenuItem.css */
 .card-menu-item {
-    width: 200px;
-    min-height: 120px;
-    background-color: #293345;
-    color: #fff;
-    padding: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+  width: 200px;
+  min-height: 120px;
+  background-color: #293345;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
   
-  .card-menu-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    background-color: #3a4558;
-  }
+.card-menu-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  background-color: #3a4558;
+}
   
-  .card-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
   
-  .card-text {
-    font-size: 0.9rem;
-    opacity: 0.9;
-  }
-  
+.card-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

@@ -12,20 +12,27 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  max-width: 1200px;
+  max-width: 1400px; /* ✅ 최대 너비 증가 */
   margin: 0 auto;
 }
 
-/* 각 Spotfire 박스 */
+/* Spotfire 박스 (크기 조정) */
 .spotfire-box {
   flex: 1;
   background-color: #1d2532;
-  padding: 15px;
+  padding: 20px;
   border: 2px solid #3b82f6;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+  
+  width: 700px;
+  height: 500px;
+  position: relative; /* ✅ 내부 요소 위치 지정 가능하도록 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Spotfire 박스를 클릭하면 전체 화면 모달 활성화 */
@@ -55,11 +62,27 @@
   align-items: center;
 }
 
-/* Spotfire iframe 전체 화면 */
-.fullscreen-iframe {
-  width: 100%;
-  height: 100%;
+/* Spotfire 내부 iframe (박스 크기에 맞게 자동 조정) */
+.spotfire-frame {
+  width: 100%; /* ✅ 부모 박스에 맞게 자동 조정 */
+  height: 100%; /* ✅ 부모 박스 높이에 맞게 자동 조정 */
   border: none;
+  border-radius: 5px;
+}
+
+/* h3 텍스트 중앙 고정 */
+.spotfire-box h3 {
+  position: absolute; /* ✅ iframe 위에 고정 */
+  top: 50%; /* 박스 중앙 위치 */
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+  background: rgba(0, 0, 0, 0.5); /* ✅ 반투명 배경 추가 (가독성 향상) */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  z-index: 2; /* ✅ iframe보다 위에 배치 */
+  pointer-events: none; /* ✅ 클릭 이벤트가 iframe으로 전달되도록 설정 */
 }
 
 /* 닫기 버튼 스타일 */

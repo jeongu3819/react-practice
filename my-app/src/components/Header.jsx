@@ -5,19 +5,16 @@ import MegaMenu from "./MegaMenu";
 import "../styles/Header.css";
 
 function Header({ activeMenu, setActiveMenu }) {
-  const handleMenuClick = (menuId) => {
-    if (activeMenu === menuId) {
-      setActiveMenu(null); // 다시 클릭하면 닫기
-    } else {
-      setActiveMenu(menuId); // 새로운 메뉴 선택
-    }
+  const handleLogoClick = () => {
+    setActiveMenu(null); // ✅ 클릭 시 초기 화면(HeroSection)으로 변경
   };
 
   return (
     <>
       <header className="header-container">
-        <div className="logo-area">
-          <span className="logo-text">MySite</span>
+        {/* 로고 클릭 시 초기 화면으로 이동 */}
+        <div className="logo-area" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+          <span className="logo-text">FDC Portal</span>
         </div>
 
         <nav className="nav-menu">
@@ -25,7 +22,7 @@ function Header({ activeMenu, setActiveMenu }) {
             <div
               key={menu.id}
               className={`nav-item ${activeMenu === menu.id ? "active" : ""}`}
-              onClick={() => handleMenuClick(menu.id)}
+              onClick={() => setActiveMenu(menu.id)}
             >
               {menu.label}
             </div>
@@ -33,7 +30,7 @@ function Header({ activeMenu, setActiveMenu }) {
         </nav>
       </header>
 
-      {/* MegaMenu는 activeMenu가 존재할 때만 보이도록 */}
+      {/* ✅ MegaMenu를 헤더 아래에서 단일하게 유지 */}
       {activeMenu && (
         <div className="mega-menu-wrapper">
           <MegaMenu subItems={menuData.find((menu) => menu.id === activeMenu)?.subItems || []} />
