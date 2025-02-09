@@ -1,0 +1,79 @@
+/* 전체 Spotfire 컨테이너 */
+.spotfire-container {
+  width: 100%;
+  padding: 20px 40px;
+  background-color: #0f131d;
+  color: #fff;
+  text-align: center;
+}
+
+/* Spotfire 2개를 가로로 배치 */
+.spotfire-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 각 Spotfire 박스 */
+.spotfire-box {
+  flex: 1;
+  background-color: #1d2532;
+  padding: 15px;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Spotfire 박스를 클릭하면 전체 화면 모달 활성화 */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 전체 화면 모드의 Spotfire */
+.fullscreen-content {
+  position: relative;
+  width: 90vw; /* 전체 화면 크기로 조정 */
+  height: 90vh;
+  background-color: #1d2532;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Spotfire iframe 전체 화면 */
+.fullscreen-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 닫기 버튼 스타일 */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: red;
+}

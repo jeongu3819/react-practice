@@ -1,0 +1,24 @@
+/* 전체 MegaMenu를 감싸는 박스 */
+.mega-menu-wrapper {
+    width: 100%; /* 전체 너비 */
+    background-color: #1d2532; /* Mendix 스타일 */
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative; /* 헤더 아래 자연스럽게 위치 */
+  }
+  
+  /* 내부 컨텐츠를 일정 너비로 정렬 */
+  .mega-menu-container {
+    max-width: 1200px; /* 중앙 정렬을 위해 최대 너비 설정 */
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* 카드 그리드 스타일 */
+  .mega-menu-grid {
+    display: flex;
+    gap: 20px;
+  }
+  

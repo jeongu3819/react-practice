@@ -1,0 +1,15 @@
+/* 처음에는 HeroSection이 보이고, Spotfire는 숨김 */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+}
