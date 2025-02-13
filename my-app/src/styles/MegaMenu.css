@@ -1,24 +1,32 @@
-/* 전체 MegaMenu를 감싸는 박스 */
-/* MegaMenu가 헤더 아래에 단일하게 유지되도록 설정 */
-.mega-menu-wrapper {
-  width: 100%; /* ✅ 전체 너비로 확장 */
-  background-color: #1d2532;
-  padding: 20px 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  position: relative; /* 헤더 아래 자연스럽게 위치 */
-}
-  
-/* MegaMenu 내부 정렬 */
+/* 예: mega-menu-container 간단 스타일 */
 .mega-menu-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  gap: 20px;
+  width: 100%;
+  background-color: #333; /* 예시 */
+  color: #fff;
+  padding: 16px;
+  margin-bottom: 20px; /* 아래 영역과 간격 */
+  position: relative;
 }
-  
-/* 카드 그리드 스타일 */
-.mega-menu-grid {
+
+.mega-menu-row {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap; /* 가로로 채우되 넘치면 아래로 내려감 */
+  gap: 16px;
+  justify-content: center; /* 중앙 정렬 */
 }
-  
+
+.menu-card {
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  width: 200px; /* 카드 너비 */
+  text-align: center;
+}
+.menu-card h4 {
+  margin: 0 0 8px 0;
+}
+.menu-card p {
+  margin: 0;
+  font-size: 0.9rem;
+}

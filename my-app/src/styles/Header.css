@@ -61,7 +61,7 @@
   background-color: #2563eb;
 }
 
-  /* 클릭한 메뉴 활성화 스타일 */
+/* 클릭한 메뉴 활성화 스타일 */
 .nav-item.active {
   color: #3b82f6;
 }
@@ -70,4 +70,66 @@ img {
   max-width: 100%;
   height: auto;
   object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+}
+
+/* ✅ 비밀번호 입력 창 배경 */
+.password-prompt {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* ✅ 비밀번호 입력 박스 */
+.password-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ 입력 필드 스타일 */
+.password-box input {
+  width: 200px;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* ✅ 버튼 스타일 */
+.password-box button {
+  margin: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.password-box button:first-of-type {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.password-box button:first-of-type:hover {
+  background-color: #2563eb;
+}
+
+.password-box button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.password-box button:last-of-type:hover {
+  background-color: #d32f2f;
 }

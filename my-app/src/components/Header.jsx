@@ -1,41 +1,69 @@
 // src/components/Header.jsx
-import React from "react";
+import React, { useState } from "react";
 import menuData from "../data/menuData";
-import MegaMenu from "./MegaMenu";
+import SettingsDrawer from "./SettingsDrawer";
+import MegaMenu from "./MegaMenu"; // ✅ MegaMenu 컴포넌트 (드롭다운/메가메뉴)
 import "../styles/Header.css";
 
-function Header({ activeMenu, setActiveMenu }) {
+function Header({ activeMenu, setActiveMenu, resetHeroSection, visitorCount }) {
+  const [showSettingsDrawer, setShowSettingsDrawer] = useState(false);
+
   const handleLogoClick = () => {
-    setActiveMenu(null); // ✅ 클릭 시 초기 화면(HeroSection)으로 변경
+    setActiveMenu(null);
+    resetHeroSection();
+  };
+
+  // 메뉴 클릭 시 해당 메뉴 ID를 activeMenu로 저장
+  const handleMenuClick = (menuId) => {
+    // 이미 열려있는 메뉴를 다시 클릭하면 닫기
+    if (activeMenu === menuId) {
+      setActiveMenu(null);
+    } else {
+      setActiveMenu(menuId);
+    }
   };
 
   return (
     <>
       <header className="header-container">
-        {/* 로고 클릭 시 초기 화면으로 이동 */}
-        <div className="logo-area" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+        <div
+          className="logo-area"
+          onClick={handleLogoClick}
+          style={{ cursor: "pointer" }}
+        >
           <span className="logo-text">FDC Portal</span>
         </div>
 
+        {/* 상단 네비게이션 메뉴 */}
         <nav className="nav-menu">
           {menuData.map((menu) => (
             <div
               key={menu.id}
               className={`nav-item ${activeMenu === menu.id ? "active" : ""}`}
-              onClick={() => setActiveMenu(menu.id)}
+              onClick={() => handleMenuClick(menu.id)}
             >
               {menu.label}
+              {/* 현재 활성 메뉴(클릭된 메뉴)와 같을 때만 MegaMenu 표시 */}
+              {activeMenu === menu.id && <MegaMenu subItems={menu.subItems} />}
             </div>
           ))}
         </nav>
+
+        {/* 설정 버튼 */}
+        <button
+          className="settings-button"
+          onClick={() => setShowSettingsDrawer(true)}
+        >
+          페이지 설정
+        </button>
       </header>
 
-      {/* ✅ MegaMenu를 헤더 아래에서 단일하게 유지 */}
-      {activeMenu && (
-        <div className="mega-menu-wrapper">
-          <MegaMenu subItems={menuData.find((menu) => menu.id === activeMenu)?.subItems || []} />
-        </div>
-      )}
+      {/* 설정 Drawer (오른쪽 사이드) */}
+      <SettingsDrawer
+        isOpen={showSettingsDrawer}
+        onClose={() => setShowSettingsDrawer(false)}
+        visitorCount={visitorCount}
+      />
     </>
   );
 }

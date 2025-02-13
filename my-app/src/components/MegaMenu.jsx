@@ -1,14 +1,16 @@
 // src/components/MegaMenu.jsx
 import React from "react";
-import CardMenuItem from "./CardMenuItem";
 import "../styles/MegaMenu.css";
 
 function MegaMenu({ subItems }) {
   return (
     <div className="mega-menu-container">
-      <div className="mega-menu-grid">
+      <div className="mega-menu-row">
         {subItems.map((item) => (
-          <CardMenuItem key={item.id} title={item.title} text={item.text} link={item.link} />
+          <div key={item.id} className="menu-card">
+            <h4>{item.title}</h4>
+            <p>{item.text}</p>
+          </div>
         ))}
       </div>
     </div>

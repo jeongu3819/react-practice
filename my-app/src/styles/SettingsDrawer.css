@@ -1,0 +1,76 @@
+/* 전체 오버레이 (배경 클릭 시 닫기 가능하도록) */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0); /* 투명/반투명. 원하면 0.5로 지정 */
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+  pointer-events: none; /* 초기 상태에서 클릭 불가 */
+}
+
+/* 오픈 상태에서 배경을 살짝 어둡게 하고 싶다면 */
+.drawer-overlay.open {
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: auto; /* 클릭 가능 */
+}
+
+/* 오른쪽에서 슬라이드되는 패널 */
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px; /* 패널 너비 */
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%); /* 처음엔 화면 밖 */
+  transition: transform 0.3s ease;
+}
+
+/* 오픈 상태면 패널이 화면 안으로 */
+.drawer-overlay.open .drawer-panel {
+  transform: translateX(0);
+}
+
+/* 헤더 영역 */
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.drawer-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* 닫기 버튼 */
+.drawer-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* 내용 영역 */
+.drawer-content {
+  padding: 16px;
+  overflow-y: auto;
+  height: calc(100% - 56px); /* 헤더 높이만큼 뺀 값 */
+}
+
+/* 섹션 구역 */
+.drawer-section {
+  margin-bottom: 16px;
+}
+
+.drawer-section h4 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
