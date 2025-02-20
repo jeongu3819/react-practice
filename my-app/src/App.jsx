@@ -1,60 +1,115 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import SpotfireContainer from "./components/SpotfireContainer";
 import HeroSection from "./components/HeroSection";
+import SpotfireContainer from "./components/SpotfireContainer"; // 메뉴별 Spotfire
+import CardMenuItem from "./components/CardMenuItem"; // 우리가 수정한 컴포넌트
+import menuData from "./data/menuData";
+import SettingsDrawer from "./components/SettingsDrawer";
 import "./styles/App.css";
-import MegaMenu from "./components/MegaMenu"; // ✅ MegaMenu import 추가
-import menuData from "./data/menuData"; // ✅ menuData import 추가
 
 function App() {
   const [activeMenu, setActiveMenu] = useState(null);
-  const [heroKey, setHeroKey] = useState(0);
-  const [visitorCount, setVisitorCount] = useState(0); // ✅ 방문자 수 상태 추가
+  const [logs, setLogs] = useState([]);
+  const [showSettingsDrawer, setShowSettingsDrawer] = useState(false);
 
+  // 예: 로컬 스토리지에서 logs를 불러오고, 방문자 기록을 남긴다
   useEffect(() => {
-    const storedCount = localStorage.getItem("visitorCount");
-    const lastVisitDate = localStorage.getItem("lastVisitDate");
-    const today = new Date().toISOString().split("T")[0]; // ✅ 현재 날짜 (YYYY-MM-DD 형식)
-
-    if (lastVisitDate !== today) {
-      // ✅ 하루에 한 번만 방문자 수 증가
-      const newCount = storedCount ? parseInt(storedCount, 10) + 1 : 1;
-      localStorage.setItem("visitorCount", newCount);
-      localStorage.setItem("lastVisitDate", today); // ✅ 방문 날짜 갱신
-      setVisitorCount(newCount);
-    } else {
-      setVisitorCount(storedCount ? parseInt(storedCount, 10) : 1); // ✅ 기존 값 유지
+    // 불러오기
+    const storedLogs = localStorage.getItem("fdcLogs");
+    if (storedLogs) {
+      setLogs(JSON.parse(storedLogs));
     }
+    // 방문 로그 (원하시면 하루 1회만 증가 로직으로 대체)
+    addLog({ type: "VISIT" });
   }, []);
 
-  const resetHeroSection = () => {
-    setActiveMenu(null);
-    setHeroKey((prevKey) => prevKey + 1);
+  // logs 바뀔 때마다 로컬 스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("fdcLogs", JSON.stringify(logs));
+  }, [logs]);
+
+  // 로그 추가 함수
+  const addLog = (logData) => {
+    setLogs((prev) => [
+      ...prev,
+      {
+        ...logData,
+        timestamp: new Date().toISOString(),
+      },
+    ]);
   };
 
-  // ✅ 현재 활성화된 메뉴의 subItems 가져오기 (수정된 부분)
-  const currentMenu = menuData.find((menu) => menu.id === activeMenu) || {};
-  const subItems = currentMenu.subItems || []; // `undefined` 방지
+  // 메뉴 클릭 시
+  const handleMenuClick = (menuId) => {
+    setActiveMenu((prev) => (prev === menuId ? null : menuId));
+  };
+
+  // CardMenuItem 클릭 시 (링크 열기 + 로그 기록)
+  const handleCardClick = (menuId, subItem) => {
+    // 로그
+    addLog({
+      type: "CLICK",
+      menuId,
+      subItemId: subItem.id,
+    });
+    // 새 탭 열기
+    if (subItem.link) {
+      window.open(subItem.link, "_blank");
+    }
+  };
+
+  // 선택된 메뉴 정보
+  const selectedMenu = menuData.find((menu) => menu.id === activeMenu);
 
   return (
     <div className="app-container">
       <Header
+        // Header에서 activeMenu, setActiveMenu를 직접 사용해도 되고,
+        // 혹은 handleMenuClick만 넘겨줘도 됨.
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
-        resetHeroSection={resetHeroSection}
-        visitorCount={visitorCount} // ✅ 방문자 수 전달
+        // 오른쪽 상단 설정 버튼
+        resetHeroSection={() => setActiveMenu(null)}
+        visitorCount={999} // (예시로, logs에서 계산해도 됨)
+        onOpenSettings={() => setShowSettingsDrawer(true)}
       />
-      {/* 2) 메가메뉴 (activeMenu가 있을 때만 렌더링) */}
-      {activeMenu && <MegaMenu subItems={subItems} />}
 
-      {/* 3) Hero/Spotfire 영역 전환 */}
-      <div className={activeMenu ? "hidden" : "visible"}>
-        <HeroSection />
-      </div>
-      <div className={activeMenu ? "visible" : "hidden"}>
-        {activeMenu && <SpotfireContainer />}
-      </div>
+      {/* 여기서만 SettingsDrawer 렌더링 */}
+      <SettingsDrawer
+        isOpen={showSettingsDrawer}
+        onClose={() => setShowSettingsDrawer(false)}
+        /* logs, visitorCount 등 props */
+      />
+
+      {/* HeroSection: activeMenu가 없을 때만 보이도록 */}
+      {!activeMenu && <HeroSection />}
+
+      {/* activeMenu가 있으면 subItems를 CardMenuItem으로 표시 */}
+      {activeMenu && (
+        <div>
+          {/* SpotfireContainer를 메뉴별로 보이게 할 수도 있음 */}
+          <SpotfireContainer activeMenu={activeMenu} />
+
+          {/* subItems를 CardMenuItem으로 렌더링 */}
+          {selectedMenu?.subItems.map((item) => (
+            <CardMenuItem
+              key={item.id}
+              title={item.title}
+              text={item.text}
+              link={item.link}
+              onCardClick={() => handleCardClick(activeMenu, item)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* SettingsDrawer에서 logs를 받아서 통계 */}
+      <SettingsDrawer
+        isOpen={showSettingsDrawer}
+        onClose={() => setShowSettingsDrawer(false)}
+        logs={logs}
+      />
     </div>
   );
 }

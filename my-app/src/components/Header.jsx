@@ -1,12 +1,9 @@
 // src/components/Header.jsx
-import React, { useState } from "react";
+import React from "react";
 import menuData from "../data/menuData";
-import SettingsDrawer from "./SettingsDrawer";
-import MegaMenu from "./MegaMenu"; // ✅ MegaMenu 컴포넌트 (드롭다운/메가메뉴)
 import "../styles/Header.css";
 
-function Header({ activeMenu, setActiveMenu, resetHeroSection, visitorCount }) {
-  const [showSettingsDrawer, setShowSettingsDrawer] = useState(false);
+function Header({ activeMenu, setActiveMenu, resetHeroSection, visitorCount, onOpenSettings }) {
 
   const handleLogoClick = () => {
     setActiveMenu(null);
@@ -43,27 +40,15 @@ function Header({ activeMenu, setActiveMenu, resetHeroSection, visitorCount }) {
               onClick={() => handleMenuClick(menu.id)}
             >
               {menu.label}
-              {/* 현재 활성 메뉴(클릭된 메뉴)와 같을 때만 MegaMenu 표시 */}
-              {activeMenu === menu.id && <MegaMenu subItems={menu.subItems} />}
             </div>
           ))}
         </nav>
 
         {/* 설정 버튼 */}
-        <button
-          className="settings-button"
-          onClick={() => setShowSettingsDrawer(true)}
-        >
+        <button className="settings-button" onClick={onOpenSettings}>
           페이지 설정
         </button>
       </header>
-
-      {/* 설정 Drawer (오른쪽 사이드) */}
-      <SettingsDrawer
-        isOpen={showSettingsDrawer}
-        onClose={() => setShowSettingsDrawer(false)}
-        visitorCount={visitorCount}
-      />
     </>
   );
 }
