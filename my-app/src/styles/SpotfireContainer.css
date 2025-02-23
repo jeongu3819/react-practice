@@ -56,6 +56,15 @@
   z-index: 2;
 }
 
+/* 전체 화면의 Spotfire iframe */
+.spotfire-frame {
+  width: 100%; /* 부모 박스에 맞게 자동 조정 */
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+  z-index: 1;
+}
+
 /* Spotfire 박스를 클릭하면 전체 화면 모달 활성화 */
 .fullscreen-overlay {
   position: fixed;
@@ -73,23 +82,21 @@
 /* 전체 화면 모드의 Spotfire */
 .fullscreen-content {
   position: relative;
-  width: 95vw; /* 화면 크기에 맞게 조정 */
-  height: 95vh;
+  width: 100vw; /* 🔥 전체 화면 너비 */
+  height: 100vh; /* 🔥 전체 화면 높이 */
   background-color: #1d2532;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 0; /* ✅ 불필요한 padding 제거 */
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Spotfire 내부 iframe (부모 박스 크기에 맞게 자동 조정) */
-.spotfire-frame {
-  width: 100%; /* 부모 박스에 맞게 자동 조정 */
+/* 전체 화면의 Spotfire iframe */
+.fullscreen-iframe {
+  width: 100%; /* ✅ 부모 컨테이너를 꽉 채우도록 설정 */
   height: 100%;
   border: none;
-  border-radius: 5px;
-  z-index: 1;
 }
 
 /* h3 텍스트 중앙 고정 */

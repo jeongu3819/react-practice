@@ -4,7 +4,7 @@ import "../styles/SpotfireContainer.css";
 
 // 메뉴별 Spotfire 링크를 객체로 매핑
 const spotfireLinks = {
-  etch: "https://spotfire-server/etch-dashboard",
+  etch: "https://www.mendix.com/resources/",
   cln: "https://spotfire-server/cln-dashboard",
   cmp: "https://spotfire-server/cmp-dashboard",
   // 필요하다면 나머지도 추가
@@ -28,7 +28,7 @@ function SpotfireContainer({ activeMenu }) {
 
   return (
     <div className="spotfire-container">
-      <h2 className="spotfire-title">{activeMenu} - Spotfire Viewer</h2>
+      <h2 className="spotfire-title">{activeMenu.toUpperCase()} - REPORT</h2>
 
       {/* ✅ Spotfire 박스를 가로 정렬 */}
       <div className="spotfire-grid">
