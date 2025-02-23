@@ -30,14 +30,25 @@ function SpotfireContainer({ activeMenu }) {
     <div className="spotfire-container">
       <h2 className="spotfire-title">{activeMenu} - Spotfire Viewer</h2>
 
-      {/* 간단히 하나의 Spotfire Iframe만 렌더링 */}
-      <div className="spotfire-box" onClick={handleExpand}>
-        <div className="spotfire-label">SP</div>
-        <iframe
-          src={spotfireUrl}
-          title={`Spotfire - ${activeMenu}`}
-          className="spotfire-frame"
-        />
+      {/* ✅ Spotfire 박스를 가로 정렬 */}
+      <div className="spotfire-grid">
+        <div className="spotfire-box" onClick={handleExpand}>
+          <div className="spotfire-label">SP1</div>
+          <iframe
+            src={spotfireUrl}
+            title={`Spotfire - ${activeMenu}`}
+            className="spotfire-frame"
+          />
+        </div>
+
+        <div className="spotfire-box" onClick={handleExpand}>
+          <div className="spotfire-label">SP2</div>
+          <iframe
+            src={spotfireUrl}
+            title={`Spotfire - ${activeMenu}`}
+            className="spotfire-frame"
+          />
+        </div>
       </div>
 
       {/* 전체 화면 표시 */}

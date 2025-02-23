@@ -14,16 +14,16 @@
 /* Spotfire 2개를 가로로 배치 (반응형 적용) */
 .spotfire-grid {
   display: flex; /* 가로 정렬 */
-  justify-content: center;
-  gap: 20px; /* 뷰포트 크기에 맞게 간격 조정 */
-  max-width: 90vw; /* 화면 너비의 90%까지 확장 */
+  justify-content: space-between;
+  /* gap: 10px; /* 뷰포트 크기에 맞게 간격 조정 */
+  width: 100%;
+  /* max-width: 1400px; /* 화면 너비의 90%까지 확장 */
   margin: 0 auto;
-  flex-wrap: wrap; /* 작은 화면에서는 자동으로 줄 바꿈 */
+  flex-wrap: nowrap; /* 작은 화면에서는 자동으로 줄 바꿈 */
 }
 
 /* Spotfire 박스 (반응형 적용) */
 .spotfire-box {
-  flex: 1;
   background-color: #1d2532;
   padding: 20px;
   border: 2px solid #3b82f6;
@@ -32,16 +32,14 @@
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease-in-out;
-  
-  /* 기존 고정 크기 제거하고 화면 크기에 맞게 조정 */
-  height: auto;
-
-  max-width: 90vw;
-  min-width: 500px; /* 최소 크기 설정 */
-  right: 20px;
+  min-height: 400px; /* 최소 높이 설정 */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* flex-basis: 70%; /* 🔥 기본 너비 (50% 이상 가능) */
+  flex: 1; /* 🔥 flex-grow를 사용하여 최대한 확장 */
+  min-width: 550px; /* 🔥 최소 너비 제한 */
+  margin: 0 10px; /* 🔥 gap 대신 margin으로 조정 */
 }
 
 /* ✅ Spotfire 박스 오른쪽 상단에 텍스트 추가 */
@@ -76,9 +74,9 @@
 .fullscreen-content {
   position: relative;
   width: 95vw; /* 화면 크기에 맞게 조정 */
-  height: 90vh;
+  height: 95vh;
   background-color: #1d2532;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   display: flex;
   justify-content: center;

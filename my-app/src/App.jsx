@@ -41,9 +41,9 @@ function App() {
   };
 
   // 메뉴 클릭 시
-  const handleMenuClick = (menuId) => {
+  /*const handleMenuClick = (menuId) => {
     setActiveMenu((prev) => (prev === menuId ? null : menuId));
-  };
+  };*/
 
   // CardMenuItem 클릭 시 (링크 열기 + 로그 기록)
   const handleCardClick = (menuId, subItem) => {
