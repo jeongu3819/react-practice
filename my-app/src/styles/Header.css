@@ -3,31 +3,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  /* 전체 폭을 100% 사용 + 가운데 정렬 + 최대 폭 1200px */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* 중앙 정렬 */
+
   padding: 0 40px;
   height: 70px;
   background-color: #0f131d;
   color: #fff;
-  position: relative; /* MegaMenu를 헤더 아래 배치하기 쉽게 */
+
+  /* position: relative; 로 MegaMenu를 아래에 배치하고 싶다면 유지 가능 */
+  position: relative;
   overflow: visible;
-  width: 100vw; /* 전체 화면 너비로 확장 */
-  max-width: 100vw;
+
+  /* 기존에 있던 right: 50px 은 삭제 */
+  /* max-width: 100% 도 여기선 안 쓰는 것이 좋음 */
 }
 
 .logo-area .logo-text {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 .nav-menu {
   display: flex;
-  gap: 60px;
-  flex-wrap: wrap; /* 필요할 경우 줄 바꿈 허용 */
-  min-width: fit-content;
+  /* gap이 너무 크면 버튼이 밀릴 수 있으므로 약간 줄임 */
+  gap: 35px;
+  flex-wrap: wrap; /* 좁은 화면에서 줄 바꿈 허용 */
 }
 
+/* nav-item도 padding을 조정 */
 .nav-item {
   position: relative;
-  padding: 10px;
+  /* 너무 넓으면 한 줄이 길어져 오른쪽 버튼 침범 가능 */
+  padding: 10px; 
   cursor: pointer;
   font-weight: 500;
 }
@@ -42,7 +53,7 @@
   background-color: transparent;
   color: #fff;
   border: 1px solid #fff;
-  padding: 6px 12px;
+  padding: 3px 6px;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -132,4 +143,28 @@ img {
 
 .password-box button:last-of-type:hover {
   background-color: #d32f2f;
+}
+
+/* ↓↓↓ 여기서부터 화면이 작아졌을 때(예: 768px 이하) 달라져야 하는 스타일만 override */
+@media (max-width: 768px) {
+  .header-container {
+    height: auto;           /* 높이를 자동으로 */
+    flex-direction: column; /* 수직 배치 */
+    align-items: flex-start;
+    padding: 0 20px;        /* 패딩 조금 줄이기 */
+  }
+  
+  .nav-menu {
+    flex-direction: column; /* 메뉴 항목을 세로로 배열 */
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .nav-item {
+    padding: 8px;
+    /* 글자 크기를 조금 줄이는 것도 가능 */
+    /* font-size: 0.9rem; */
+  }
+
+  /* 필요하다면 .settings-button, .nav-btn 등의 패딩/마진도 줄일 수 있음 */
 }

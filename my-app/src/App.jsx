@@ -75,22 +75,12 @@ function App() {
         onOpenSettings={() => setShowSettingsDrawer(true)}
       />
 
-      {/* 여기서만 SettingsDrawer 렌더링 */}
-      <SettingsDrawer
-        isOpen={showSettingsDrawer}
-        onClose={() => setShowSettingsDrawer(false)}
-        /* logs, visitorCount 등 props */
-      />
-
       {/* HeroSection: activeMenu가 없을 때만 보이도록 */}
       {!activeMenu && <HeroSection />}
 
       {/* activeMenu가 있으면 subItems를 CardMenuItem으로 표시 */}
       {activeMenu && (
         <div>
-          {/* SpotfireContainer를 메뉴별로 보이게 할 수도 있음 */}
-          <SpotfireContainer activeMenu={activeMenu} />
-
           {/* subItems를 CardMenuItem으로 렌더링 */}
           {selectedMenu?.subItems.map((item) => (
             <CardMenuItem
@@ -101,6 +91,9 @@ function App() {
               onCardClick={() => handleCardClick(activeMenu, item)}
             />
           ))}
+
+          {/* SpotfireContainer를 메뉴별로 보이게 할 수도 있음 */}
+          <SpotfireContainer activeMenu={activeMenu} />
         </div>
       )}
 

@@ -3,6 +3,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -23,10 +25,11 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 300px; /* 패널 너비 */
-  height: 100vh;
+  width: 350px; /* 패널 너비 */
+  height: 100%;
   background-color: #fff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* 내용이 많아지면 스크롤 가능 */
   transform: translateX(100%); /* 처음엔 화면 밖 */
   transition: transform 0.3s ease;
 }
