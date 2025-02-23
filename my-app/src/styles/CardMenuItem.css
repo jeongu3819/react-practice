@@ -1,10 +1,10 @@
 /* src/styles/CardMenuItem.css */
 .card-menu-item {
-  width: 200px;
-  min-height: 120px;
+  width: 180px;
+  min-height: 65px;
   background-color: #3b82f6;
   color: #fff;
-  padding: 16px;
+  padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s ease;

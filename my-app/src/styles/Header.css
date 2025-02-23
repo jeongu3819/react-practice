@@ -22,6 +22,14 @@
   /* max-width: 100% 도 여기선 안 쓰는 것이 좋음 */
 }
 
+.card-container {
+  display: flex;       /* 가로 정렬 */
+  gap: 16px;           /* 아이템 간격 */
+  flex-wrap: wrap;     /* 화면 너비 부족 시 줄바꿈 */
+  justify-content: center; /* 가운데 정렬 */
+  padding: 20px;       /* 여백 추가 */
+}
+
 .logo-area .logo-text {
   font-size: 1.5rem;
   font-weight: bold;

@@ -22,6 +22,54 @@ const menuData = [
           text: "Documentation & resources",
           link: "https://www.mendix.com/resources/",
         },
+        {
+          id: "etch-sub4",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub5",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub6",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub7",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub8",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub9",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub10",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
+        {
+          id: "etch-sub11",
+          title: "Etch Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
       ],
     },
     {
@@ -62,6 +110,12 @@ const menuData = [
       id: "cvd",
       label: "CVD",
       subItems: [
+        {
+          id: "cvd-sub1",
+          title: "cvd Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
         // 3개 정도
       ],
     },
@@ -69,6 +123,12 @@ const menuData = [
       id: "diff",
       label: "DIFF",
       subItems: [
+        {
+          id: "diff-sub1",
+          title: "diff Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
         // 3개 정도
       ],
     },
@@ -76,6 +136,12 @@ const menuData = [
       id: "imp",
       label: "IMP",
       subItems: [
+        {
+          id: "imp-sub1",
+          title: "imp Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
         // 3개 정도
       ],
     },
@@ -83,6 +149,12 @@ const menuData = [
       id: "metal",
       label: "METAL",
       subItems: [
+        {
+          id: "metal-sub1",
+          title: "metal Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
         // 3개 정도
       ],
     },
@@ -90,6 +162,12 @@ const menuData = [
       id: "photo",
       label: "PHOTO",
       subItems: [
+        {
+          id: "photo-sub1",
+          title: "photo Resources",
+          text: "Documentation & resources",
+          link: "https://www.mendix.com/resources/",
+        },
         // 3개 정도
       ],
     },

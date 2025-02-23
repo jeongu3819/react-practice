@@ -22,14 +22,13 @@
 
 /* 오른쪽에서 슬라이드되는 패널 */
 .drawer-panel {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 350px; /* 패널 너비 */
   height: 100%;
   background-color: #fff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
-  overflow-y: auto; /* 내용이 많아지면 스크롤 가능 */
   transform: translateX(100%); /* 처음엔 화면 밖 */
   transition: transform 0.3s ease;
 }
@@ -64,8 +63,8 @@
 /* 내용 영역 */
 .drawer-content {
   padding: 16px;
-  overflow-y: auto;
-  height: calc(100% - 56px); /* 헤더 높이만큼 뺀 값 */
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+  height: calc(100% - 75px); /* 헤더 높이만큼 뺀 값 */
 }
 
 /* 섹션 구역 */

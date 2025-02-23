@@ -80,7 +80,7 @@ function App() {
 
       {/* activeMenu가 있으면 subItems를 CardMenuItem으로 표시 */}
       {activeMenu && (
-        <div>
+        <div className="card-container">
           {/* subItems를 CardMenuItem으로 렌더링 */}
           {selectedMenu?.subItems.map((item) => (
             <CardMenuItem
