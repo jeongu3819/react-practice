@@ -19,8 +19,19 @@ function App() {
     if (storedLogs) {
       setLogs(JSON.parse(storedLogs));
     }
-    // 방문 로그 (원하시면 하루 1회만 증가 로직으로 대체)
-    addLog({ type: "VISIT" });
+    
+    // 2) 하루 한 번만 방문 로그 남기기
+    const storedVisitDate = localStorage.getItem("lastVisitDate"); 
+    const todayStr = new Date().toDateString(); 
+    // 예) 'Mon Feb 27 2025' 이런 식으로 문자열 반환
+
+    if (storedVisitDate !== todayStr) {
+      // 오늘 방문한 적 없으므로 새 방문자로 기록
+      addLog({ type: "VISIT" });
+
+      // 로컬 스토리지에 오늘 날짜 저장
+      localStorage.setItem("lastVisitDate", todayStr);
+    }
   }, []);
 
   // logs 바뀔 때마다 로컬 스토리지에 저장

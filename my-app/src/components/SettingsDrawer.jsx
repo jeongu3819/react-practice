@@ -15,6 +15,21 @@ function SettingsDrawer({ isOpen, onClose, logs }) {
 
   if (!isOpen) return null;
 
+  // ✅ (1) Reset Logs (전체 초기화) 함수
+  const resetAllLogs = () => {
+    // 정말 지울 건지 확인
+    if (window.confirm("정말로 모든 로그를 삭제하시겠습니까?")) {
+      // localStorage에서 "fdcLogs"와 "lastVisitDate" 삭제
+      localStorage.removeItem("fdcLogs");
+      localStorage.removeItem("lastVisitDate");
+
+      // 강제로 새로고침 or 상태 초기화
+      window.location.reload(); 
+      // 또는 onClose() 후, logs를 비워버리는 setLogs([])가 필요.
+      // 근데 logs는 App에서 관리하므로, App 측에 reset 함수를 넘겨줘야 가능.
+    }
+  };
+
   // ✅ (B) 비밀번호 체크 함수
   const handlePasswordCheck = () => {
     if (passwordInput === CORRECT_PASSWORD) {
@@ -169,6 +184,23 @@ function SettingsDrawer({ isOpen, onClose, logs }) {
                 통계 그래프 보기
               </button>
             </div>
+            
+            {/* ✅ (2) Reset Logs 버튼 */}
+            <div style={{ marginTop: "20px" }}>
+              <button
+                style={{
+                  backgroundColor: "red",
+                  color: "#fff",
+                  padding: "8px 12px",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  border: "none",
+                }}
+                onClick={resetAllLogs}
+              >
+                Reset Logs
+              </button>
+            </div>            
           </div>
         )}
       </div>
