@@ -7,6 +7,60 @@ import CardMenuItem from "./components/CardMenuItem"; // 우리가 수정한 컴
 import menuData from "./data/menuData";
 import SettingsDrawer from "./components/SettingsDrawer";
 import "./styles/App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import StatisticsPage from "./components/StatisticsPage"; // 통계 페이지 추가
+
+function MainPage({ activeMenu, setActiveMenu, logs, addLog, showSettingsDrawer, setShowSettingsDrawer }) {
+  // 선택된 메뉴 정보
+  const selectedMenu = menuData.find((menu) => menu.id === activeMenu);
+
+  const handleCardClick = (menuId, subItem) => {
+    addLog({
+      type: "CLICK",
+      menuId,
+      subItemTitle: subItem.title,
+    });
+    if (subItem.link) {
+      window.open(subItem.link, "_blank");
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <Header
+        activeMenu={activeMenu}
+        setActiveMenu={setActiveMenu}
+        resetHeroSection={() => setActiveMenu(null)}
+        visitorCount={999}
+        onOpenSettings={() => setShowSettingsDrawer(true)}
+      />
+
+      {!activeMenu && <HeroSection />}
+
+      {activeMenu && (
+        <div className="card-container">
+          {selectedMenu?.subItems.map((item) => (
+            <CardMenuItem
+              key={item.id}
+              title={item.title}
+              text={item.text}
+              link={item.link}
+              onCardClick={() => handleCardClick(activeMenu, item)}
+            />
+          ))}
+
+          <SpotfireContainer activeMenu={activeMenu} />
+        </div>
+      )}
+
+      <SettingsDrawer
+        isOpen={showSettingsDrawer}
+        onClose={() => setShowSettingsDrawer(false)}
+        logs={logs}
+      />
+    </div>
+  );
+}
 
 function App() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -51,7 +105,7 @@ function App() {
     addLog({
       type: "CLICK",
       menuId,
-      subItemId: subItem.id,
+      subItemTitle: subItem.title, // Subitem의 title도 저장
     });
     // 새 탭 열기
     if (subItem.link) {
@@ -63,47 +117,36 @@ function App() {
   const selectedMenu = menuData.find((menu) => menu.id === activeMenu);
 
   return (
-    <div className="app-container">
-      <Header
-        // Header에서 activeMenu, setActiveMenu를 직접 사용해도 되고,
-        // 혹은 handleMenuClick만 넘겨줘도 됨.
-        activeMenu={activeMenu}
-        setActiveMenu={setActiveMenu}
-        // 오른쪽 상단 설정 버튼
-        resetHeroSection={() => setActiveMenu(null)}
-        visitorCount={999} // (예시로, logs에서 계산해도 됨)
-        onOpenSettings={() => setShowSettingsDrawer(true)}
-      />
+    <Router>
+      <div className="app-container">
+        <Header
+          activeMenu={activeMenu}
+          setActiveMenu={setActiveMenu}
+          resetHeroSection={() => setActiveMenu(null)}
+          visitorCount={999}
+          onOpenSettings={() => setShowSettingsDrawer(true)}
+        />
 
-      {/* HeroSection: activeMenu가 없을 때만 보이도록 */}
-      {!activeMenu && <HeroSection />}
-
-      {/* activeMenu가 있으면 subItems를 CardMenuItem으로 표시 */}
-      {activeMenu && (
-        <div className="card-container">
-          {/* subItems를 CardMenuItem으로 렌더링 */}
-          {selectedMenu?.subItems.map((item) => (
-            <CardMenuItem
-              key={item.id}
-              title={item.title}
-              text={item.text}
-              link={item.link}
-              onCardClick={() => handleCardClick(activeMenu, item)}
-            />
-          ))}
-
-          {/* SpotfireContainer를 메뉴별로 보이게 할 수도 있음 */}
-          <SpotfireContainer activeMenu={activeMenu} />
-        </div>
-      )}
-
-      {/* SettingsDrawer에서 logs를 받아서 통계 */}
-      <SettingsDrawer
-        isOpen={showSettingsDrawer}
-        onClose={() => setShowSettingsDrawer(false)}
-        logs={logs}
-      />
-    </div>
+        <Routes>
+          {/* 메인 페이지 (기본 페이지) */}
+          <Route
+            path="/"
+            element={
+              <MainPage
+                activeMenu={activeMenu}
+                setActiveMenu={setActiveMenu}
+                logs={logs}
+                addLog={addLog}
+                showSettingsDrawer={showSettingsDrawer}
+                setShowSettingsDrawer={setShowSettingsDrawer}
+              />
+            }
+          />
+          {/* 통계 페이지 (StatisticsPage) */}
+          <Route path="/statistics" element={<StatisticsPage logs={logs} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

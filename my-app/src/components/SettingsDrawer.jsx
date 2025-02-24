@@ -1,8 +1,11 @@
 // SettingsDrawer.jsx (간략 예시)
 import React from "react";
 import "../styles/SettingsDrawer.css";
+import { useNavigate } from "react-router-dom"; // 추가
 
 function SettingsDrawer({ isOpen, onClose, logs }) {
+  const navigate = useNavigate(); // ✅ React Router의 네비게이션 함수
+
   if (!isOpen) return null;
 
   // (1) 오늘, 이번 주, 이번 달, 이번 연도 계산을 위한 기준
@@ -56,20 +59,20 @@ function SettingsDrawer({ isOpen, onClose, logs }) {
       if (isSameWeek(logDate, now)) weeklyVisits++;
       if (isSameMonth(logDate, now)) monthlyVisits++;
       if (isSameYear(logDate, now)) yearlyVisits++;
-    } else if (log.type === "CLICK") {
+    } else if (log.type === "CLICK" && log.subItemTitle) {
       // 메뉴 클릭 통계
-      const menuId = log.menuId; // 예: 'etch'
+      const key = `${log.menuId} - ${log.subItemTitle}`; // 🔥 'ETCH - Etch Overview' 형태로 저장
       if (isSameDay(logDate, now)) {
-        dailyClicks[menuId] = (dailyClicks[menuId] || 0) + 1;
+        dailyClicks[key] = (dailyClicks[key] || 0) + 1;
       }
       if (isSameWeek(logDate, now)) {
-        weeklyClicks[menuId] = (weeklyClicks[menuId] || 0) + 1;
+        weeklyClicks[key] = (weeklyClicks[key] || 0) + 1;
       }
       if (isSameMonth(logDate, now)) {
-        monthlyClicks[menuId] = (monthlyClicks[menuId] || 0) + 1;
+        monthlyClicks[key] = (monthlyClicks[key] || 0) + 1;
       }
       if (isSameYear(logDate, now)) {
-        yearlyClicks[menuId] = (yearlyClicks[menuId] || 0) + 1;
+        yearlyClicks[key] = (yearlyClicks[key] || 0) + 1;
       }
     }
   });
@@ -95,39 +98,40 @@ function SettingsDrawer({ isOpen, onClose, logs }) {
           </div>
 
           {/* 메뉴 클릭 통계 */}
+          {/* Subitem 클릭 통계 */}
           <div>
             <h4>메뉴 클릭 수 (오늘 기준)</h4>
-            {Object.entries(dailyClicks).map(([menuId, count]) => (
-              <p key={menuId}>
-                {menuId} : {count}회
+            {Object.entries(dailyClicks).map(([key, count]) => (
+              <p key={key}>
+                {key} : {count}회
               </p>
             ))}
 
             <h4>이번주</h4>
-            {Object.entries(weeklyClicks).map(([menuId, count]) => (
-              <p key={menuId}>
-                {menuId} : {count}회
+            {Object.entries(weeklyClicks).map(([key, count]) => (
+              <p key={key}>
+                {key} : {count}회
               </p>
             ))}
 
             <h4>이번달</h4>
-            {Object.entries(monthlyClicks).map(([menuId, count]) => (
-              <p key={menuId}>
-                {menuId} : {count}회
+            {Object.entries(monthlyClicks).map(([key, count]) => (
+              <p key={key}>
+                {key} : {count}회
               </p>
             ))}
 
             <h4>올해</h4>
-            {Object.entries(yearlyClicks).map(([menuId, count]) => (
-              <p key={menuId}>
-                {menuId} : {count}회
+            {Object.entries(yearlyClicks).map(([key, count]) => (
+              <p key={key}>
+                {key} : {count}회
               </p>
             ))}
           </div>
 
           {/* 하단에 그래프 페이지 링크 (React Router 사용 시) */}
           <div>
-            <button onClick={() => window.alert("그래프 페이지로 이동!")}>
+            <button onClick={() => navigate("/statistics")}>
               통계 그래프 보기
             </button>
           </div>
