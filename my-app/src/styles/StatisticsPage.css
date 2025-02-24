@@ -1,0 +1,38 @@
+.statistics-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.statistics-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    overflow-x: auto; /* 긴 라벨이 넘치면 스크롤 */
+    background-color: white;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #2563eb;
+}
